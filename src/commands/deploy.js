@@ -5,12 +5,14 @@ const confirm = require('../helpers/confirm');
 const sitePicker = require('../helpers/site_picker');
 const errorLogger = require('../helpers/error_logger');
 
-const spinner = [
-  '/ Processing',
-  '| Processing',
-  '\\ Processing',
-  '- Processing'
-];
+// const spinner = [
+//   '/ Processing',
+//   '| Processing',
+//   '\\ Processing',
+//   '- Processing'
+// ];
+
+const spinner = ['◐', '◓', '◑', '◒'];
 
 /* Warnings about typical gotchas for deploying the root dir */
 const fileChecksCWD = {
@@ -107,7 +109,7 @@ exports.cmd = function (config, cmd) {
         }
       };
 
-      console.log('Deploying ' + (options.dir ? 'folder: ' : 'zip: ') + chalk.bold(path));
+      console.log(`🔥  Roasting deploy from ${options.dir && 'folder' || 'zip'} ${chalk.bold(path)}`);
       return site.createDeploy(options).then(function (deploy) {
         config.writeLocalConfig({site_id: site.id, path: path});
 
@@ -118,7 +120,7 @@ exports.cmd = function (config, cmd) {
           var i = 0;
           var spin = setInterval(function () {
             ui.updateBottomBar(spinner[i++ % 4]);
-          }, 300);
+          }, 130);
         }
         return deploy.waitForReady().then(function (deploy) {
           if (ui) {
@@ -129,8 +131,10 @@ exports.cmd = function (config, cmd) {
             console.log('\nDraft deploy ' + chalk.bold(deploy.id) + ':\n  ' + chalk.bold(deploy.deploy_url));
             process.exit(0);
           } else {
-            console.log('\nDeploy is live (permalink):\n  ' + chalk.bold(deploy.deploy_url));
-            console.log('\nLast build is always accessible on ' + chalk.bold(deploy.url));
+            console.log(`\n☕  ${chalk.bold('Deploy roasted!')}`);
+            console.log(`\n✨  ${chalk.bold(deploy.url)}`);
+            // console.log('\nDeploy is live (permalink):\n  ' + chalk.bold(deploy.deploy_url));
+            // console.log('\nLast build is always accessible on ' + chalk.bold(deploy.url));
             process.exit(0);
           }
         });
