@@ -13,7 +13,8 @@ const pkg = require('../package.json');
 updateNotifier({pkg}).notify();
 
 program
-  .usage('roast [options] [command]')
+  .version(pkg.version)
+  .usage('[options] [command]');
 
 program
   .command('deploy')

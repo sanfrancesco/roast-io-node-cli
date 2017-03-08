@@ -91,7 +91,7 @@ export default class Site extends Model {
 function calculateShas (files) {
   var shas = files.map(function (file) {
     return fsReadPromise(file.abs).then(function (data) {
-      var shasum = crypto.createHash('sha1');
+      var shasum = crypto.createHash('sha256');
       shasum.update(data);
       file.sha = shasum.digest('hex');
       return true;

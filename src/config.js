@@ -6,7 +6,7 @@
   const chalk = require('chalk');
   const webauth = require('./webauth');
 
-  const CLIENT_ID = process.env.ROAST_CLIENT_ID || '5edad8f69d47ae8923d0cf0b4ab95ba1415e67492b5af26ad97f4709160bb31b';
+  const CLIENT_ID = process.env.ROAST_CLIENT_ID || '88d63585-be90-443f-9c49-00f297652e26';
   const API_ENDPOINT = process.env.ROAST_ENDPOINT;
   const PREVIEW_DOMAIN = process.env.ROAST_PREVIEW_DOMAIN || 'roast.io';
   const CONFIG_DIR = path.join(homeDir(), '.roast');
