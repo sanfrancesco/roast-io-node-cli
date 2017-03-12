@@ -14,6 +14,11 @@ const errorLogger = require('../helpers/error_logger');
 
 const spinner = ['◐', '◓', '◑', '◒'];
 
+function getSpinner (state, idx) {
+  var spinnerIcon = spinner[idx % spinner.length];
+  return spinnerIcon + `  ${state}  `;
+}
+
 /* Warnings about typical gotchas for deploying the root dir */
 const fileChecksCWD = {
   '_config.yml':
@@ -116,12 +121,16 @@ exports.cmd = function (config, cmd) {
         if (ui && uploaded > 1) {
           ui && ui.updateBottomBar('[========================================] Uploading');
         }
+        // this runs in parallel to the code updating the
+        // file upload progress UI (so just leave it running
+        // while adding any other indicators)
         if (ui) {
           var i = 0;
           var spin = setInterval(function () {
-            ui.updateBottomBar(spinner[i++ % 4]);
+            ui.updateBottomBar(getSpinner(deploy.state, i++));
           }, 130);
         }
+
         return deploy.waitForReady().then(function (deploy) {
           if (ui) {
             ui.updateBottomBar('');
