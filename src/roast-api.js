@@ -80,6 +80,10 @@ export default class RoastApi {
 
     return new Promise((resolve, reject) => {
       // console.log('making request to', requestOptions.path);
+      // for error reporting
+      if (!this.requestsMade) this.requestsMade = [];
+      this.requestsMade.push({method: requestOptions.method, path: requestOptions.path});
+
       var request = this.http.request(requestOptions, (res) => {
         let body = '';
         let data = null;
