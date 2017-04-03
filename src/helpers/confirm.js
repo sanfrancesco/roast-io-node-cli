@@ -22,7 +22,7 @@ exports.withWarning = function (value, warning) {
   console.log(chalk.bold('Warning: ') + warning);
   console.log('\n');
 
-  return inquire.promt({name: 'continue', message: 'Are you sure you want to continue?', type: 'confirm'})
+  return inquire.prompt({name: 'continue', message: 'Are you sure you want to continue?', type: 'confirm'})
       .then(function (result) {
         if (result.continue) {
           return value;
