@@ -9,7 +9,7 @@
   const CLIENT_ID = process.env.ROAST_CLIENT_ID || '88d63585-be90-443f-9c49-00f297652e26';
   const API_ENDPOINT = process.env.ROAST_ENDPOINT;
   const PREVIEW_DOMAIN = process.env.ROAST_PREVIEW_DOMAIN || 'roast.io';
-  const CONFIG_DIR = path.join(homeDir(), '.roast');
+  const CONFIG_DIR = path.join(homeDir(), process.env.ROAST_CONFIG_DIR_NAME || '.roast');
   const CONFIG_PATH = path.join(CONFIG_DIR, 'config');
   const LOCAL_CONFIG_PATH = path.join(process.cwd(), '.roast');
 
