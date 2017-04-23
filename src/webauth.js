@@ -1,4 +1,5 @@
 const webui = require('./helpers/webui');
+const errorLogger = require('./helpers/error_logger');
 
 // http://www.2ality.com/2014/10/es6-promises-api.html
 function delay (ms) {
@@ -11,6 +12,8 @@ function waitForTicket (ticket, waitUntil) {
   if (waitUntil && new Date() > waitUntil) {
     return Promise.reject('Timeout while waiting for ticket grant');
   }
+
+  if (!ticket) return Promise.reject('The server did not send a ticket');
 
   if (ticket.authorized) {
     return Promise.resolve(ticket);
@@ -31,7 +34,7 @@ exports.login = function (options) {
       });
     });
   }).catch(function (err) {
-    console.log('Error generating authorization ticket: %s', err);
+    errorLogger.log('\nError generating authorization ticket:', err);
     process.exit(1);
   });
 };

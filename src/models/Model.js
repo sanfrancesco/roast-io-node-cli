@@ -12,10 +12,6 @@ export default class Model {
     return this.client.request({ url: this.apiPath })
         .then(response => {
           return this.constructor.call(this, response.client, response.data);
-        })
-        .catch(response => {
-          console.log('refresh catch', response);
-          Promise.reject(response.data);
         });
   }
 }
