@@ -1,6 +1,6 @@
 {
   "name": "roast",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "CLI for deploying single page apps to Roast.io",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,13 @@
   "bin": {
     "roast": "./dist/index.js"
   },
+  "keywords": [
+    "roast",
+    "hosting",
+    "cdn",
+    "deploy",
+    "single page app"
+  ],
   "repository": {},
   "author": "Jonathan Otto <support@roast.io> (https://www.roast.io/)",
   "license": "MIT",
