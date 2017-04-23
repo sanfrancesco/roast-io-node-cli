@@ -185,8 +185,6 @@ function deployFromDir (site, dir, draft, progress) {
         return deploy.uploadFiles(filtered, progress);
       });
     });
-  }).catch(function (err) {
-    return Promise.reject(err);
   });
 }
 

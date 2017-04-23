@@ -71,26 +71,28 @@ export default class Deploy extends Model {
     var self = this;
     var sem = semaphore(20);
     var results = files.map(function (file) {
-      sem.take(function () {
-        return fsReadPromise(file.abs).then(function (data) {
-          var filePath = file.rel.split('/').map(function (segment) {
-            return encodeURIComponent(segment);
-          }).join('/');
+      return new Promise(function(resolve, reject) {
+        sem.take(function () {
+          return fsReadPromise(file.abs).then(function (data) {
+            var filePath = file.rel.split('/').map(function (segment) {
+              return encodeURIComponent(segment);
+            }).join('/');
 
-          return self.client.request({
-            url: '/deploys/' + self.id + '/files/' + filePath,
-            type: 'put',
-            body: data,
-            contentType: 'application/octet-stream',
-            ignoreResponse: true
-          }).then(function (response) {
-            progress && progress('upload', {file: file, total: files.length});
-            sem.leave();
-            return file;
-          }).catch(function (response) {
-            progress && progress('uploadError', {file: file, message: response.data});
-            sem.leave();
-            return Promise.reject(response.data);
+            return self.client.request({
+              url: '/deploys/' + self.id + '/files/' + filePath,
+              type: 'put',
+              body: data,
+              contentType: 'application/octet-stream',
+              ignoreResponse: true
+            }).then(function (response) {
+              progress && progress('upload', {file: file, total: files.length});
+              sem.leave();
+              return resolve(file);
+            }).catch(function (response) {
+              progress && progress('uploadError', {file: file, message: response.data});
+              sem.leave();
+              return reject(response);
+            });
           });
         });
       });
