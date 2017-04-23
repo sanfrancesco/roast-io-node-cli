@@ -150,7 +150,7 @@ exports.cmd = function (config, cmd) {
       });
     });
   }).catch(function (err) {
-    errorLogger.log('Error during deploy: ', err);
+    errorLogger.log('\nError during deploy: ', err);
     process.exit(1);
   });
 };

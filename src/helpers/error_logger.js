@@ -36,7 +36,7 @@ exports.log = function(prefix, error) {
   console.log(prefix, chalk.bold(msg));
 
   if (requestsMade) {
-    console.log('HTTP requests:')
+    console.log('\nHTTP requests:')
     requestsMade.reverse().forEach(function(request) {
       console.log(' -', chalk.bold(request.method.toUpperCase()), request.path);
     })
