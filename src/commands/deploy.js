@@ -16,7 +16,10 @@ const spinner = ['◐', '◓', '◑', '◒'];
 
 function getSpinner (state, idx) {
   var spinnerIcon = spinner[idx % spinner.length];
-  return spinnerIcon + `  ${state}  `;
+
+  const displayState = state === 'prerendering' ? 'server side rendering' : state;
+
+  return spinnerIcon + `  ${displayState}  `;
 }
 
 /* Warnings about typical gotchas for deploying the root dir */
