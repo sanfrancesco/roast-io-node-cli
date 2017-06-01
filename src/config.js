@@ -95,10 +95,24 @@
     writeConfig(config);
   };
 
-  var readConfig = function () {
+  var readConfig = function() {
+    // read from env var if exists
+    if (process.env.ROAST_TOKEN && `${process.env.ROAST_TOKEN}`.length)
+      return { access_token: process.env.ROAST_TOKEN };
+
+    // next, config path
     if (fs.existsSync(CONFIG_PATH)) {
       return JSON.parse(fs.readFileSync(CONFIG_PATH));
     }
+
+    // if in CI env, warn about ROAST_TOKEN env var and exit
+    if (process.env.CI) {
+      console.log(
+        "CI environments must set the ROAST_TOKEN environment variable. Get your token from ~/.roast/config or when you sign in to https://www.roast.io"
+      );
+      return process.exit(1);
+    }
+
     return null;
   };
 
