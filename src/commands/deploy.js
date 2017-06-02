@@ -127,10 +127,14 @@ exports.cmd = function (config, cmd) {
         // this runs in parallel to the code updating the
         // file upload progress UI (so just leave it running
         // while adding any other indicators)
+        let lastState;
         if (ui) {
           var i = 0;
           var spin = setInterval(function () {
-            ui.updateBottomBar(getSpinner(deploy.state, i++));
+            if (!process.env.CI || (process.env.CI && deploy.state !== lastState)) {
+              ui.updateBottomBar(getSpinner(deploy.state, i++));
+              lastState = deploy.state;
+            }
           }, 130);
         }
 
