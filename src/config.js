@@ -73,7 +73,7 @@
   const findDeployPath = inputConfigPath => {
     const configPath = inputConfigPath.replace(/^\.\//, "");
 
-    if (fs.existsSync(configPath)) return configPath;
+    if (fs.existsSync(configPath)) return configPath === "" ? "./" : configPath;
 
     const oneDirUp = configPath
       .split("/")
@@ -82,7 +82,7 @@
 
     if (oneDirUp && oneDirUp.length) return findDeployPath(oneDirUp);
 
-    return "";
+    return "./";
   };
 
   Config.prototype.getPath = function (cmd) {
