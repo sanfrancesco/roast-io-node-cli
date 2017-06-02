@@ -27,3 +27,9 @@ The first time you use the roast CLI command you'll be asked to authenticate.
 Your access token is stored in `~/.roast/config`.
 
 Roast also stores a local `.roast` file in the folder where you run `roast deploy` from where the `site_id` is stored.
+
+## From CI
+
+1. When you push your app to your CI server, the project directory needs the local `.roast` file (it has 2 things: `site_id`, and `path`)
+2. Set the `ROAST_TOKEN` environment variable to your API token (found either in ~/.roast/config) or in the https://www.roast.io web UI after signing in
+

@@ -63,8 +63,32 @@
     });
   };
 
+  // if this is run in a different environment where an absolute path
+  // no longer matches, this will attempt to find a matching relative path
+  // from current dir
+  // the most common use case:
+  //   your laptop has: /users/myname/work/project/build
+  //   your ci env is:  /ubuntu/home/project/build
+  //   this function ensures the build dir is returned
+  const findDeployPath = inputConfigPath => {
+    const configPath = inputConfigPath.replace(/^\.\//, "");
+
+    if (fs.existsSync(configPath)) return configPath;
+
+    const oneDirUp = configPath
+      .split("/")
+      .slice(configPath.startsWith("/") ? 2 : 1)
+      .join("/");
+
+    if (oneDirUp && oneDirUp.length) return findDeployPath(oneDirUp);
+
+    return "";
+  };
+
   Config.prototype.getPath = function (cmd) {
-    return cmd.path || this.path;
+    const path = cmd.path || this.path;
+    if (path) return findDeployPath(path);
+    return path;
   };
 
   Config.prototype.writeLocalConfig = function (options) {
