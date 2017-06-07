@@ -1,32 +1,41 @@
-const chalk = require('chalk');
-const inquire = require('inquirer');
+const chalk = require("chalk");
+const inquire = require("inquirer");
 
-exports.withConfirmation = function (options) {
+exports.withConfirmation = function(options) {
   if (options.skip) {
     return Promise.resolve(true);
   }
-  return inquire.prompt([{
-    name: 'confirm',
-    type: 'confirm',
-    message: options.msg || 'Are you sure?'
-  }]).then(function (answers) {
-    if (answers.confirm) {
-      return true;
-    }
-    process.exit(1);
-  });
+  return inquire
+    .prompt([
+      {
+        name: "confirm",
+        type: "confirm",
+        message: options.msg || "Are you sure?"
+      }
+    ])
+    .then(function(answers) {
+      if (answers.confirm) {
+        return true;
+      }
+      process.exit(1);
+    });
 };
 
-exports.withWarning = function (value, warning) {
-  console.log('\n');
-  console.log(chalk.bold('Warning: ') + warning);
-  console.log('\n');
+exports.withWarning = function(value, warning) {
+  console.log("\n");
+  console.log(chalk.bold("Warning: ") + warning);
+  console.log("\n");
 
-  return inquire.prompt({name: 'continue', message: 'Are you sure you want to continue?', type: 'confirm'})
-      .then(function (result) {
-        if (result.continue) {
-          return value;
-        }
-        process.exit(1);
-      });
+  return inquire
+    .prompt({
+      name: "continue",
+      message: "Are you sure you want to continue?",
+      type: "confirm"
+    })
+    .then(function(result) {
+      if (result.continue) {
+        return value;
+      }
+      process.exit(1);
+    });
 };

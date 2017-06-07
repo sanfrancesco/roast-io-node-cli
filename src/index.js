@@ -22,13 +22,9 @@ program._name = "roast";
 
 program.version(pkg.version).usage(usage);
 
-program
-  .command("deploy")
-  .action(config.wrap(program, deploy.cmd));
+program.command("deploy").action(config.wrap(program, deploy.cmd));
 
-program
-  .command("sites")
-  .action(config.wrap(program, listSites.cmd));
+program.command("sites").action(config.wrap(program, listSites.cmd));
 
 if (!process.argv.slice(2).length) {
   program.outputHelp();

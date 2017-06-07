@@ -1,8 +1,8 @@
 var chalk = require("chalk");
 
 var prettyErrorMap = {
-  'request entity too large': 'One of the files uploaded was too large'
-}
+  "request entity too large": "One of the files uploaded was too large"
+};
 
 exports.log = function(prefix, error) {
   // for showing a "stack trace" of HTTP requests
@@ -32,7 +32,6 @@ exports.log = function(prefix, error) {
       if (prettyErrorMap[data.message]) {
         data.message = prettyErrorMap[data.message];
       }
-
     } catch (err) {
       // for strings: "Authentication failed"
       data = error.data;
@@ -45,10 +44,9 @@ exports.log = function(prefix, error) {
   console.log(prefix, chalk.bold(msg));
 
   if (requestsMade) {
-    console.log('\nHTTP requests:')
+    console.log("\nHTTP requests:");
     requestsMade.reverse().forEach(function(request) {
-      console.log(' -', chalk.bold(request.method.toUpperCase()), request.path);
-    })
+      console.log(" -", chalk.bold(request.method.toUpperCase()), request.path);
+    });
   }
-
 };

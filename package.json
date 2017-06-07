@@ -1,6 +1,6 @@
 {
   "name": "roast",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "CLI for deploying single page apps to Roast.io",
   "main": "index.js",
   "scripts": {
@@ -22,13 +22,14 @@
   "author": "Jonathan Otto <support@roast.io> (https://www.roast.io/)",
   "license": "MIT",
   "devDependencies": {
-    "babel-preset-babili": "^0.0.10",
     "babel-cli": "^6.22.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-babili": "^0.0.10",
     "babel-preset-env": "^1.1.8",
     "flow-bin": "^0.38.0",
     "jasmine": "2.4.0",
     "nock": "^8.0.0",
+    "prettier": "^1.4.2",
     "semistandard": "^9.2.1"
   },
   "dependencies": {
