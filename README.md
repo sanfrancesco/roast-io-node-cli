@@ -28,8 +28,14 @@ Your access token is stored in `~/.roast/config`.
 
 Roast also stores a local `.roast` file in the folder where you run `roast deploy` from where the `site_id` is stored.
 
-## From CI
+## From CI (circleci, Travis CI, Jenkins, etc.)
 
-1. When you push your app to your CI server, the project directory needs the local `.roast` file (it has 2 things: `site_id`, and `path`)
-2. Set the `ROAST_TOKEN` environment variable to your API token (found either in ~/.roast/config) or in the https://www.roast.io web UI after signing in
+1. When you push your app to your CI server, you can configure the required `site_id` and `path` with either:
+    1. The local `.roast` file (so you _could_ check this into your repository)
+    2. or CLI options: `roast deploy -s MY-SITE-ID -p dist`
+2. and **must** set the `ROAST_TOKEN` environment variable to your API token (found either in ~/.roast/config) or in the https://www.roast.io web UI after signing in
+
+```bash
+  ROAST_TOKEN=MY_SECRET_TOKEN roast deploy -s MY-SITE-ID -p dist
+```
 
