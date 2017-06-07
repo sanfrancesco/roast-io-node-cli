@@ -72,26 +72,39 @@ Config.prototype.getSite = function(cmd) {
   });
 };
 
-// if this is run in a different environment where an absolute path
+// if this is run in a different environment where an **absolute path**
 // no longer matches, this will attempt to find a matching relative path
 // from current dir
-// the most common use case:
-//   your laptop has: /users/myname/work/project/build
-//   your ci env is:  /ubuntu/home/project/build
-//   this function ensures the build dir is returned
+// - the most common use case:
+//    - your laptop has: /users/myname/work/project/build
+//    - your ci env is:  /ubuntu/home/project/build
+//    - this function ensures the build dir is returned
+// - this doesn't do anything to relative or empty paths
 const findDeployPath = inputConfigPath => {
-  const configPath = inputConfigPath.replace(/^\.\//, "");
+  const isAbsolute = inputConfigPath && inputConfigPath.startsWith("/");
 
-  if (fs.existsSync(configPath)) return configPath === "" ? "./" : configPath;
+  const discoverPath = inputPath => {
+    const configPath = inputPath.replace(/^\.\//, "");
 
-  const oneDirUp = configPath
-    .split("/")
-    .slice(configPath.startsWith("/") ? 2 : 1)
-    .join("/");
+    if (fs.existsSync(configPath)) return configPath === "" ? "./" : configPath;
 
-  if (oneDirUp && oneDirUp.length) return findDeployPath(oneDirUp);
+    const oneDirUp = configPath
+      .split("/")
+      .slice(configPath.startsWith("/") ? 2 : 1)
+      .join("/");
 
-  return "./";
+    if (oneDirUp && oneDirUp.length) return discoverPath(oneDirUp);
+
+    return "./";
+  };
+
+  if (inputConfigPath === "") {
+    return "./";
+  } else if (isAbsolute) {
+    return discoverPath(inputConfigPath);
+  } else {
+    return inputConfigPath;
+  }
 };
 
 Config.prototype.getPath = function(cmd) {
