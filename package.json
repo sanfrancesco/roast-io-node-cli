@@ -1,6 +1,6 @@
 {
   "name": "roast",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "CLI for deploying single page apps to Roast.io",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,10 @@
     "deploy",
     "single page app"
   ],
-  "repository": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sanfrancesco/roast-io-node-cli.git"
+  },
   "author": "Jonathan Otto <support@roast.io> (https://www.roast.io/)",
   "license": "MIT",
   "devDependencies": {
