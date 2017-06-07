@@ -1,4 +1,4 @@
-export default class Model {
+module.exports = class Model {
   constructor (client, attributes) {
     for (var key in attributes) {
       this[key] = attributes[key];

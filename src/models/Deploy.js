@@ -16,9 +16,9 @@ function delay (ms) {
   });
 }
 
-import Model from './Model';
+const Model = require("./Model");
 
-export default class Deploy extends Model {
+module.exports = class Deploy extends Model {
   constructor (client, attributes) {
     super(client, attributes);
   }

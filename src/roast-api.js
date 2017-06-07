@@ -8,13 +8,12 @@ const https = require('https');
 
 
 
-
-import Ticket from './models/Ticket';
-import Site from './models/Site';
+const Ticket = require('./models/Ticket');
+const Site = require('./models/Site');
 
 const Client = { models: { Ticket, Site } };
 
-export default class RoastApi {
+module.exports = class RoastApi {
   // typically { endpoint, client_id, access_point }
   static createClient (options) {
     return new this(options);

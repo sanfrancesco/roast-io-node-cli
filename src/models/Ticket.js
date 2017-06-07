@@ -1,6 +1,6 @@
-import Model from './Model';
+const Model = require('./Model');
 
-export default class Ticket extends Model {
+module.exports = class Ticket extends Model {
   constructor (client, attributes) {
     super(client, attributes);
   }

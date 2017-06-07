@@ -2,11 +2,10 @@
 
 // @flow
 
-import program from "commander";
-
-import deploy from "./commands/deploy";
-import listSites from "./commands/list_sites";
-import config from "./config";
+const program = require("commander");
+const deploy = require("./commands/deploy");
+const listSites = require("./commands/list_sites");
+const config = require("./config");
 
 const chalk = require("chalk");
 const updateNotifier = require("update-notifier");
@@ -25,12 +24,10 @@ program.version(pkg.version).usage(usage);
 
 program
   .command("deploy")
-  // .alias('it')
   .action(config.wrap(program, deploy.cmd));
 
 program
   .command("sites")
-  // .alias('it')
   .action(config.wrap(program, listSites.cmd));
 
 if (!process.argv.slice(2).length) {

@@ -1,5 +1,5 @@
 
-  import RoastApi from './roast-api';
+  const RoastApi = require('./roast-api');
   const path = require('path');
   const homeDir = require('home-dir');
   const fs = require('fs');

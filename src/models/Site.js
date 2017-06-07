@@ -40,14 +40,12 @@ const fsStatPromise = function (dir) {
   });
 };
 
-    // File       = require("./file").File,
-import Deploy from './Deploy';
-
-import Model from './Model';
+const Deploy = require('./Deploy');
+const Model = require('./Model');
 
 const MaxFilesForSyncDeploy = 1000;
 
-export default class Site extends Model {
+module.exports = class Site extends Model {
   constructor (client, attributes) {
     super(client, attributes);
   }
