@@ -17,7 +17,7 @@ Deploy a "single page app" JavaScript project that lives in `my-project` and bui
 
 ```bash
 cd my-project/
-roast deploy dist
+roast deploy -p dist
 ```
 
 ## Configuration and Authentication

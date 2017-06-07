@@ -22,7 +22,11 @@ program._name = "roast";
 
 program.version(pkg.version).usage(usage);
 
-program.command("deploy").action(config.wrap(program, deploy.cmd));
+program
+  .command("deploy")
+  .option("-s --site-id [id]", "Deploy to site with <id>")
+  .option("-p --path [path]", "Path to a directory to deploy")
+  .action(config.wrap(program, deploy.cmd));
 
 program.command("sites").action(config.wrap(program, listSites.cmd));
 
