@@ -12,8 +12,12 @@ const updateNotifier = require("update-notifier");
 const pkg = require("../package.json");
 updateNotifier({ pkg }).notify();
 
+const authEnvVar =
+  "    - set ROAST_TOKEN env var for authentication in\n      CI environments otherwise a prompt will force\n      you through an auth flow that will persist a\n      token in ~/.roast/config)";
+
 const usage =
   "[options] [command]\n\n" +
+  `${authEnvVar}\n\n` +
   chalk.bold("    The fastest hosting service for JavaScript Apps\n\n") +
   "    https://www.roast.io/";
 
@@ -22,8 +26,11 @@ program._name = "roast";
 
 program.version(pkg.version).usage(usage);
 
+const deployUsage = "[options]\n\n" + `${authEnvVar}`;
+
 program
   .command("deploy")
+  .usage(deployUsage)
   .option("-s --site-id [id]", "Deploy to site with <id>")
   .option("-p --path [path]", "Path to a directory to deploy")
   .action(config.wrap(program, deploy.cmd));
