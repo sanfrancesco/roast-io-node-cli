@@ -42,3 +42,13 @@ if (!process.argv.slice(2).length) {
 } else {
   program.parse(process.argv);
 }
+
+// inexplicably... without this, this CLI when run after npm install -g
+// (but NOT from actual source directory), exits with code 130
+// but with this, it exits with 0... but the console.log statement is
+// not printed - can't explain it
+process.on("SIGINT", function() {
+  console.log("\nGracefully shutting down from SIGINT (Ctrl+C)");
+
+  process.exit();
+});
