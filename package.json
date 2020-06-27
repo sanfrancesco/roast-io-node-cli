@@ -1,6 +1,6 @@
 {
   "name": "roast",
-  "version": "2.3.13",
+  "version": "2.3.15",
   "description": "CLI for deploying single page apps to Roast.io",
   "main": "index.js",
   "scripts": {
