@@ -1,6 +1,6 @@
 {
   "name": "roast",
-  "version": "2.3.15",
+  "version": "2.3.16",
   "description": "CLI for deploying single page apps to Roast.io",
   "main": "index.js",
   "scripts": {
@@ -44,6 +44,6 @@
     "inquirer": "7.2",
     "open": "^0.0.5",
     "semaphore": "^1.0.5",
-    "update-notifier": "^1.0.3"
+    "update-notifier": "4.1.0"
   }
 }
