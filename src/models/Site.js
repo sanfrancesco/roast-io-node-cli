@@ -42,7 +42,7 @@ const fsStatPromise = function(dir) {
 const Deploy = require("./Deploy");
 const Model = require("./Model");
 
-const MaxFilesForSyncDeploy = 1000;
+const MaxFilesForSyncDeploy = 2000;
 
 module.exports = class Site extends Model {
   constructor(client, attributes) {
