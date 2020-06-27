@@ -5,6 +5,10 @@ module.exports = class Ticket extends Model {
     super(client, attributes);
   }
 
+  fakeConstructor(client, attributes) {
+    return new Ticket(client, attributes);
+  }
+
   static get path() {
     return "/oauth/tickets";
   }

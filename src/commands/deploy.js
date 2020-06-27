@@ -204,6 +204,7 @@ exports.cmd = function(config, cmd) {
         });
     })
     .catch(function(err) {
+      console.log(err);
       errorLogger.log("\nError during deploy: ", err);
       process.exit(1);
     });

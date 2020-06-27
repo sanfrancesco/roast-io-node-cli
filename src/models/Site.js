@@ -49,6 +49,10 @@ module.exports = class Site extends Model {
     super(client, attributes);
   }
 
+  fakeConstructor(client, attributes) {
+    return new Site(client, attributes);
+  }
+
   static get path() {
     return "/sites";
   }

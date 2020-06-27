@@ -10,7 +10,7 @@ module.exports = class Model {
 
   refresh() {
     return this.client.request({ url: this.apiPath }).then(response => {
-      return this.constructor.call(this, response.client, response.data);
+      return this.fakeConstructor.call(this, response.client, response.data);
     });
   }
 };

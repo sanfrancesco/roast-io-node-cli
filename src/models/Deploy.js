@@ -23,6 +23,10 @@ module.exports = class Deploy extends Model {
     super(client, attributes);
   }
 
+  fakeConstructor(client, attributes) {
+    return new Deploy(client, attributes);
+  }
+
   static get path() {
     return "/deploys";
   }
