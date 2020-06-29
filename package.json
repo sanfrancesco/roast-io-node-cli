@@ -42,7 +42,7 @@
     "graceful-fs": "^4.1.11",
     "home-dir": "^1.0.0",
     "inquirer": "7.2",
-    "open": "^0.0.5",
+    "open": "^6.0.0",
     "semaphore": "^1.0.5",
     "update-notifier": "4.1.0"
   }
